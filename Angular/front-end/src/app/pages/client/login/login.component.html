@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <h2>Login</h2>
+  <form (ngSubmit)="logar()">
+    <div class="mb-3">
+      <label for="login">Login</label>
+      <input type="text" id="login" [(ngModel)]="login" name="login" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" [(ngModel)]="senha" name="senha" class="form-control" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Entrar</button>
+  </form>
+</div>

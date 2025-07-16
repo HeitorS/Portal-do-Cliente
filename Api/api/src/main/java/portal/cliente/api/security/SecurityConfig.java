@@ -1,3 +1,4 @@
+// src/main/java/portal/cliente/api/security/SecurityConfig.java
 package portal.cliente.api.security;
 
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -11,6 +12,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import portal.cliente.api.service.UsuarioService;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +30,14 @@ public class SecurityConfig {
                 )
                 .userDetailsService(usuarioService)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .cors(cors -> cors.configurationSource(request -> {
+                    var corsConfig = new org.springframework.web.cors.CorsConfiguration();
+                    corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+                    corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                    corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept","Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+                    corsConfig.setAllowCredentials(true);
+                    return corsConfig;
+                }))
                 .build();
     }
 

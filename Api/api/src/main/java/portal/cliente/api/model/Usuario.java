@@ -16,6 +16,7 @@ public class Usuario {
 
     private String login;
     private String senha;
+    private String email;
 
     private String role; // Ex: ROLE_ADMIN, ROLE_USER
 }

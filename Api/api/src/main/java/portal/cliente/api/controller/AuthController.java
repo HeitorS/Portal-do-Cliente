@@ -3,12 +3,9 @@ package portal.cliente.api.controller;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 import portal.cliente.api.service.UsuarioService;
 import portal.cliente.api.dto.CadastroUsuarioDTO;
 import portal.cliente.api.security.JwtUtil;
@@ -19,6 +16,7 @@ import jakarta.validation.Valid;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200/*")
 @RequestMapping("/auth")
 public class AuthController {
 

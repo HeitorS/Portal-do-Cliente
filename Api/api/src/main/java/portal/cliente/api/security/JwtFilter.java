@@ -31,6 +31,11 @@ public class JwtFilter extends GenericFilter {
         HttpServletRequest req = (HttpServletRequest) request;
         String authHeader = req.getHeader("Authorization");
 
+        if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
+            res.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             if (jwtUtil.tokenValido(token)) {
