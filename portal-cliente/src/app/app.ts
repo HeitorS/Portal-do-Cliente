@@ -18,15 +18,7 @@ export class App {
   }
 
   chamadaFuncao() {
-    this.http.get('http://localhost:8080/v1/auth/check').subscribe({
-      next: (response) => {
-        console.log('Resposta do servidor:', response);
-      },
-      error: (error) => {
-        console.error('Erro ao chamar o servidor:', error);
-      }
-    });
-    // this.http.post('http://localhost:8080/v1/auth/login',{email:'joao.silva@gmail.com', senha: 'admin123'}).subscribe({
+    // this.http.get('http://localhost:8080/v1/auth/check').subscribe({
     //   next: (response) => {
     //     console.log('Resposta do servidor:', response);
     //   },
@@ -34,5 +26,13 @@ export class App {
     //     console.error('Erro ao chamar o servidor:', error);
     //   }
     // });
+    this.http.post('http://localhost:8080/v1/auth/login',{email:'joao.silva@gmail.com', senha: 'admin123'}).subscribe({
+      next: (response) => {
+        console.log('Resposta do servidor:', response);
+      },
+      error: (error) => {
+        console.error('Erro ao chamar o servidor:', error);
+      }
+    });
   }
 }
