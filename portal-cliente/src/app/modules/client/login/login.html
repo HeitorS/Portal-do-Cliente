@@ -1,0 +1,26 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card p-4 shadow" style="width: 400px;">
+    <h4 class="text-center mb-4">Acesso ao Sistema</h4>
+    
+    <form (ngSubmit)="logar()" #loginForm="ngForm">
+      <div class="mb-3">
+        <label for="login" class="form-label">Login</label>
+        <input type="text" id="login" class="form-control" [(ngModel)]="auth.email" name="login" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input type="password" id="senha" class="form-control" [(ngModel)]="auth.senha" name="senha" required />
+      </div>
+
+      <button class="btn btn-primary w-100" type="submit" [disabled]="loginForm.invalid">
+        Entrar
+      </button>
+    </form>
+    @if(erro) {
+      <div class="alert alert-danger mt-3">
+        Credenciais inválidas.
+      </div>
+    }
+  </div>
+</div>

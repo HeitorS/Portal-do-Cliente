@@ -1,0 +1,10 @@
+export class AuthResponse {
+  token: string = '';
+  role: string = '';
+  
+  constructor(token: string, role: string) {
+    this.token = token;
+    this.role = role;    
+  }
+
+}
