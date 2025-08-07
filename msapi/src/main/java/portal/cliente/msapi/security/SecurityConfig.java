@@ -23,7 +23,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // sem sessões
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll() // libera o endpoint de produtos
+                        .requestMatchers("/v1/auth/**").permitAll() // libera o endpoint de produtos
                         .anyRequest().authenticated() // protege o restante (se quiser)
                 )
                 .build();
