@@ -30,6 +30,7 @@ public class Usuario {
 
     private String telefone;
 
+    @Column(nullable = false)
     private String cpf;
 
     private Date nascimento;
