@@ -8,6 +8,7 @@ import portal.cliente.msapi.dto.TokenDTO;
 import portal.cliente.msapi.entity.Usuario;
 import portal.cliente.msapi.exception.UsuarioNotFoundException;
 import portal.cliente.msapi.repository.UsuarioRepository;
+import portal.cliente.msapi.security.JwtUtil;
 
 @Service
 @RequiredArgsConstructor
@@ -23,13 +24,20 @@ public class LoginService {
         Usuario user = usuarioRepository.findByEmail(username)
                 .orElseThrow(() -> new UsuarioNotFoundException());
         if (passwordEncoder.matches(password, user.getSenha())) {
+            JwtUtil jwtUtil = new JwtUtil();
+            String token = jwtUtil.gerarToken(user.getEmail());
             return TokenDTO.builder()
-                    .token("fake-jwt-token")
+                    .token(token)
                     .role(user.getRole().name())
                     .timeout(System.currentTimeMillis() + 3600000) // 1 hour expiration
                     .build();
         }
         return null;
+    }
+
+    public Usuario valid(String username) throws UsuarioNotFoundException {
+        return usuarioRepository.findByEmail(username)
+                .orElseThrow(() -> new UsuarioNotFoundException());
     }
 
     public String encodePassword(String password) {

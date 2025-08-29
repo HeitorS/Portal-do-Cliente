@@ -1,11 +1,15 @@
 package portal.cliente.msapi.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import portal.cliente.msapi.util.RoleEnum;
-
+import jakarta.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
+import java.util.List;
+
+import lombok.*;
 
 
 @Entity
@@ -13,7 +17,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -43,4 +47,23 @@ public class Usuario {
     private String atualizacao;
 
     private String status;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role == RoleEnum.ADMIN) {
+            return List.of( new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
 }
